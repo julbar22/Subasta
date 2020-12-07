@@ -1,4 +1,4 @@
-const MyStringStore = artifacts.require("./MyStringStore.sol");
+const MyStringStore = artifacts.require("./Subasta.sol");
 
 contract("MyStringStore", accounts => {
   it("should store the string 'Hey there!'", async () => {

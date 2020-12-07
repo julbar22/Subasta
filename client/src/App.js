@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
-import ReadString from "./ReadString";
-import SetString from "./SetString";
+import ListaContratos from "./ListaContratos";
+import ReadSubasta from "./components/ReadSubasta";
+import SubastaForm from "./components/SubastaForm"
 
 class App extends React.Component {
-  state = { loading: true, drizzleState: null };
-
+  state = { loading: true, drizzleState: null, subastas: [], conContrato: false };
+  contractoAsignado = null;
+  visualizacionContrato = false;
   componentDidMount() {
     const { drizzle } = this.props;
 
-    console.log(drizzle)
     // subscribe to changes in the store
     this.unsubscribe = drizzle.store.subscribe(() => {
 
@@ -27,18 +28,38 @@ class App extends React.Component {
     this.unsubscribe();
   }
 
+
+
+
+
+  getTxStatus = () => {
+    const { drizzle } = this.props;
+    return drizzle.contracts;
+  };
+
+  getContract = (contrato) => {
+    alert("aqui no llega")
+    console.log(contrato)
+    this.setState({ conContrato: true })
+  }
+
+
   render() {
+    const { drizzle } = this.props
     if (this.state.loading) return "Loading Drizzle...";
     return (
       <div className="App">
-        <ReadString
-          drizzle={this.props.drizzle}
-          drizzleState={this.state.drizzleState}
-        />
-        <SetString
-          drizzle={this.props.drizzle}
-          drizzleState={this.state.drizzleState}
-        />
+        <header>
+          <h1>Subastas en Linea</h1>
+        </header>
+        <div className="content">
+          <div className="left">
+            <SubastaForm drizzle={drizzle} drizzleState={this.state.drizzleState} />
+          </div>
+          <div className="right">
+            <ReadSubasta drizzle={drizzle} drizzleState={this.state.drizzleState} />
+          </div>
+        </div>
       </div>
     );
   }
