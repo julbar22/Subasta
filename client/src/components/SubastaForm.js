@@ -4,7 +4,8 @@ class SubastaForm extends React.Component {
 
   state = {
     account: "",
-    date: ""
+    date: "",
+    name: ""
   }
 
   constructor(props) {
@@ -20,16 +21,17 @@ class SubastaForm extends React.Component {
   addSubasta(e) {
     e.preventDefault();
     //lo estoy usando como segundos de la subasta
-    const { drizzle } = this.props;
-    const contract = drizzle.contracts["Subasta"];
-    const dateFinal= new Date(this.state.date);
+
+    //const { drizzle } = this.props;
+    // const contract = drizzle.contracts["Subasta"];
+    const dateFinal = new Date(this.state.date);
     const dateActual = new Date();
-    const differencia= (dateFinal.getTime()-dateActual.getTime())/1000;
-    const valueFinal=Math.ceil(differencia)
-    console.log(valueFinal)
-    const stackId = contract.methods.SimpleAuction.cacheSend(valueFinal, this.state.account, {
-      from: this.state.account
-    });
+    const differencia = (dateFinal.getTime() - dateActual.getTime()) / 1000;
+    const valueFinal = Math.ceil(differencia)
+    this.props.agregarSubasta(valueFinal, this.state.account, this.state.name);
+    // const stackId = contract.methods.SimpleAuction.cacheSend(valueFinal, this.state.account, {
+    //   from: this.state.account
+    // });
   }
 
   getAllAcounts() {
@@ -56,6 +58,9 @@ class SubastaForm extends React.Component {
       <div className="CreateContract">
         <h3>Crea tu propia subasta</h3>
         <form className="formLinea" onSubmit={this.addSubasta.bind(this)}>
+          <label> Nombre de la subasta:
+          <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} placeholder="subasta ..."></input>
+          </label>
           <label> Seleccione la cuenta:
           <select name="account" value={this.state.account} onChange={this.handleInputChange}>
               {this.getAllAcounts()}

@@ -5,22 +5,22 @@ contract Subasta {
     // o timestamps estilo unix (segundos desde 1970-01-01)
     // o periodos de tiempo en segundos.
     address payable public beneficiary;
-    uint public auctionStart;
-    uint public biddingTime;
+    uint256 public auctionStart;
+    uint256 public biddingTime;
 
     // Estado actual de la subasta.
     address public highestBidder;
-    uint public highestBid;
+    uint256 public highestBid;
 
     // Retiradas de dinero permitidas de las anteriores pujas
-    mapping(address => uint) pendingReturns;
+    mapping(address => uint256) pendingReturns;
 
     // Fijado como true al final, no permite ningún cambio.
     bool ended;
 
     // Eventos que serán emitidos al realizar algún cambio
-    event HighestBidIncreased(address bidder, uint amount);
-    event AuctionEnded(address winner, uint amount);
+    event HighestBidIncreased(address bidder, uint256 amount);
+    event AuctionEnded(address winner, uint256 amount);
 
     // Lo siguiente es lo que se conoce como un comentario natspec,
     // se identifican por las tres barras inclinadas.
@@ -30,10 +30,8 @@ contract Subasta {
     /// Crea una subasta sencilla con un periodo de pujas
     /// de `_biddingTime` segundos. El beneficiario de
     /// las pujas es la dirección `_beneficiary`.
-    function SimpleAuction(
-        uint _biddingTime,
-        address payable _beneficiary
-    ) public {
+
+    constructor(uint256 _biddingTime, address payable _beneficiary) public {
         beneficiary = _beneficiary;
         auctionStart = now;
         biddingTime = _biddingTime;
@@ -51,11 +49,11 @@ contract Subasta {
 
         // Revierte la llamada si el periodo
         // de pujas ha finalizado.
-        require(now <= (auctionStart + biddingTime),"La subasta ha expirado");
+        require(now <= (auctionStart + biddingTime), "La subasta ha expirado");
 
         // Si la puja no es la más alta,
         // envía el dinero de vuelta.
-        require(msg.value > highestBid,"La subasta debe ser mayor");
+        require(msg.value > highestBid, "La subasta debe ser mayor");
 
         if (highestBid != 0) {
             // Devolver el dinero usando
@@ -73,7 +71,7 @@ contract Subasta {
 
     /// Retira una puja que fue superada.
     function withdraw() public returns (bool) {
-        uint amount = pendingReturns[msg.sender];
+        uint256 amount = pendingReturns[msg.sender];
         if (amount > 0) {
             // Es importante poner esto a cero porque el receptor
             // puede llamar de nuevo a esta función como parte

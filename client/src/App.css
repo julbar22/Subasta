@@ -23,11 +23,13 @@
     padding: 10px;
 }
 
-.ok-button{
+.ok-button {
     width: fit-content;
+    cursor: pointer;
+    margin: 3px;
 }
 
-.infoSubastaActual{
+.infoSubastaActual {
     display: flex;
     flex-direction: column;
 }
@@ -36,8 +38,13 @@
     padding: 10px;
 }
 
-header{
+header {
     align-items: center;
     text-align: center;
 }
 
+.subastaItem {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}

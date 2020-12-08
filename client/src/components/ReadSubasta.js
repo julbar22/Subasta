@@ -14,7 +14,7 @@ class ReadSubasta extends React.Component {
 
   componentDidMount() {
     const { drizzle } = this.props;
-    const contract = drizzle.contracts.Subasta;
+    const contract = drizzle.contracts[this.props.nameContract];
     // let drizzle know we want to watch the `myString` method
     const dataTime = contract.methods["biddingTime"].cacheCall();
     const dataBeneficiario = contract.methods["beneficiary"].cacheCall();
@@ -27,7 +27,7 @@ class ReadSubasta extends React.Component {
 
   render() {
     // get the contract state from drizzleState
-    const { Subasta } = this.props.drizzleState.contracts;
+    const Subasta  = this.props.drizzleState.contracts[this.props.nameContract];
 
     // using the saved `dataKey`, get the variable we're interested in
     let dateFinal = null;
@@ -51,7 +51,7 @@ class ReadSubasta extends React.Component {
           <label>Valor mas alto:  {highestBid && highestBid.value}</label>
         </div>
         <div>
-          <OfertaForm drizzle={this.props.drizzle} drizzleState={this.props.drizzleState} />
+          <OfertaForm drizzle={this.props.drizzle} drizzleState={this.props.drizzleState} nameContract={this.props.nameContract} />
         </div>
       </div>
 

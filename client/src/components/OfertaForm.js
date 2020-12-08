@@ -21,7 +21,7 @@ class OfertaForm extends React.Component {
     async addOferta(e) {
         e.preventDefault();
         const { drizzle, drizzleState } = this.props;
-        const contract = drizzle.contracts["Subasta"];
+        const contract = drizzle.contracts[this.props.nameContract];
         let ofertaValida = true;
         try {
             await contract.methods.bid().call({
