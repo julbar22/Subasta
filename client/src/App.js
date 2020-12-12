@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-import ListaContratos from "./ListaContratos";
 import ReadSubasta from "./components/ReadSubasta";
-import SubastaForm from "./components/SubastaForm";
 import Manager from "./components/Manager"
 
 class App extends React.Component {
