@@ -52,10 +52,10 @@ class App extends React.Component {
     if (!this.state.contrato)
       return (
         <div className="App">
-          <header>
+          <header className="header">
             <h1>Subastas en Linea</h1>
           </header>
-          <div >
+          <div>
             <Manager drizzle={drizzle} drizzleState={this.state.drizzleState} changeViewSubasta={this.changeViewSubasta.bind(this)} />
           </div>
         </div>
@@ -63,12 +63,12 @@ class App extends React.Component {
     else
       return (
         <div className="App">
-          <header>
+          <header className="header">
             <h1>Subastas en Linea</h1>
           </header>
-          <div >
+          <div className='spaceHeader' >
             <div>
-              <input type="button" value="volver" className="ok-button" onClick={() => this.changeViewSubasta(null, false)} />
+              <input type="button" value="volver" className="behind-button" onClick={() => this.changeViewSubasta(null, false)} />
             </div>
             <ReadSubasta drizzle={drizzle} drizzleState={this.state.drizzleState} nameContract={this.nameContract} />
           </div>

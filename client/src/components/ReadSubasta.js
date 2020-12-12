@@ -42,16 +42,17 @@ class ReadSubasta extends React.Component {
     }
 
     return (
-      <div>
-        <div className="infoSubastaActual">
+      <div className='contentInfo'>
+        
+        <div  className="wide center">
+          <OfertaForm drizzle={this.props.drizzle} drizzleState={this.props.drizzleState} nameContract={this.props.nameContract} />
+        </div>
+        <div className="wide infoSubastaActual">
           <h3>Informacion de la subasta</h3>
           <label>Fecha de cierre: {dateFinal && dateFinal.toString()}</label>
           <label>beneficiario:  {beneficiary && beneficiary.value}</label>
           <label>Mejor Postor:  {highestBidder && highestBidder.value}</label>
           <label>Valor mas alto:  {highestBid && highestBid.value}</label>
-        </div>
-        <div>
-          <OfertaForm drizzle={this.props.drizzle} drizzleState={this.props.drizzleState} nameContract={this.props.nameContract} />
         </div>
       </div>
 

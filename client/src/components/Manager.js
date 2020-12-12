@@ -79,9 +79,11 @@ class Manager extends React.Component {
     return this.state.subastas.map(subasta => {
       return (
         <div key={"div" + subasta.address} className="subastaItem">
-          <label key={"key" + subasta.address}>direccion: {subasta.address} </label>
-          <label key={"name" + subasta.address}>nombre: {subasta.name} </label>
-          <input className="ok-button" type="button" value="Ver Subasta" onClick={() => this.sendSubasta(subasta)} />
+          <label className="list" key={"key" + subasta.address}>Direccion: {subasta.address} </label>
+          <label className="list" key={"name" + subasta.address}>Nombre: {subasta.name} </label>
+          <div className="button">
+            <input className="ok-button" type="button" value="Ver Subasta" onClick={() => this.sendSubasta(subasta)} />
+          </div>
         </div>);
     });
   }
@@ -112,14 +114,17 @@ class Manager extends React.Component {
   render() {
     return (
       <div className="content">
-        <div className="left">
+        <div className="left center">
           <SubastaForm drizzle={this.props.drizzle} drizzleState={this.props.drizzleState} agregarSubasta={this.addSubasta.bind(this)} />
         </div>
-        <div className="right">
-          <h3>Lista de Subastas</h3>
-          <div>
-            {this.getAllSubastas()}
+        <div className="right center">
+          <div className="createContract scroll">
+            <h3>Lista de Subastas</h3>
+            <div className="listAuction">
+              {this.getAllSubastas()}
+            </div>
           </div>
+
         </div>
       </div>
 

@@ -55,19 +55,19 @@ class SubastaForm extends React.Component {
 
   render() {
     return (
-      <div className="CreateContract">
+      <div className="createContract">
         <h3>Crea tu propia subasta</h3>
         <form className="formLinea" onSubmit={this.addSubasta.bind(this)}>
           <label> Nombre de la subasta:
-          <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} placeholder="subasta ..."></input>
+          <input className="formLineaWide" name="name" type="text" value={this.state.name} onChange={this.handleInputChange} placeholder="subasta ..."></input>
           </label>
           <label> Seleccione la cuenta:
-          <select name="account" value={this.state.account} onChange={this.handleInputChange}>
+          <select className="formLineaWide" name="account" value={this.state.account} onChange={this.handleInputChange}>
               {this.getAllAcounts()}
             </select>
           </label>
-          <label> fecha de cierre de la subasta:
-          <input name="date" type="datetime-local" value={this.state.date} onChange={this.handleInputChange} placeholder="tiempo en segundos"></input>
+          <label> Fecha de cierre de la subasta:
+          <input className="formLineaWide" name="date" type="datetime-local" value={this.state.date} onChange={this.handleInputChange} placeholder="tiempo en segundos"></input>
           </label>
           <input className="ok-button" type="submit" value="Enviar"></input>
         </form>

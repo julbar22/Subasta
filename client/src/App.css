@@ -1,32 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Cairo:wght@200&family=Exo+2:wght@300;400&display=swap');
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: 35px;
+    width: 100%;
+    height: 100px;
+    top: 0px;
+    background: url(./img/header.jpg)repeat-x;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    padding: 15px;
+    color: rgb(245, 240, 240);
+}
+
 .content {
     display: flex;
     justify-content: space-around;
     min-height: 500px;
+    margin-top: 200px;
 }
 
 .left {
     width: 50%;
-    padding: 3% 0% 0% 3%;
 }
 
 .right {
     width: 50%;
-    padding: 3% 1% 0% 3%;
 }
 
 .formLinea {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 75%;
 }
 
 .formLinea label {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 25px;
+    padding: 25px;
+    width: 100%;
+}
+
+.formLineaWide {
+    background-color: transparent;
+    border-left: 0px;
+    border-top: 0px;
+    border-right: 0px;
+    border-bottom: 2px solid rgb(7, 7, 7);
+    width: 60%;
+    font-family: 'Milu', sans-serif;
+    font-size: 16px;
+    padding: 0px;
+    outline: none;
+    /*quitar el cuadro del input*/
+    height: 40px;
 }
 
 .ok-button {
-    width: fit-content;
+    background-color:rgba(51, 48, 184, 0.89);
+    border: none;
+    border-radius: 25px;
+    color: rgb(243, 237, 237);
     cursor: pointer;
-    margin: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Exo 2', sans-serif;
+    height: 50px;
+    letter-spacing: 1px;
+    margin: 10px 0px;
+    width: 50%;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
 }
 
 .infoSubastaActual {
@@ -36,15 +93,111 @@
 
 .infoSubastaActual label {
     padding: 10px;
-}
-
-header {
-    align-items: center;
-    text-align: center;
+    
 }
 
 .subastaItem {
-    margin: 5px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
+    width: 85%;
+    word-break: break-word;
+    padding: 10px;
+}
+
+.subastaItem label {
+    width: 90%;
+}
+
+
+.createContract {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(12, 11, 11);
+    background: linear-gradient(#818080ce, #ffffff);
+    border-radius: 40px;
+    min-height: 610px;
+    max-height: 610px;
+    width: 70%;
+    padding-bottom: 5px;
+    
+}
+.scroll{
+    overflow: auto;
+}
+
+.createContract h3 {
+    text-align: center;
+    font-family: 'Balsamiq Sans';
+    font-size: 35px;
+}
+
+
+.listAuction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Exo 2', sans-serif;
+    width: 100%;
+    font-size: 19px;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.spaceHeader{
+    margin-top: 150px;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.behind-button{
+    background-color:rgba(27, 26, 80, 0.89);
+    border: none;
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Exo 2', sans-serif;
+    height: 30px;
+    letter-spacing: 1px;
+    margin: 10px 0px 0px 30px;
+    width: 10%;
+}
+
+.OfertaEther{
+display: flex;
+flex-direction: column;
+align-items: center;
+border: 2px solid rgb(12, 11, 11);
+background: linear-gradient(#818080ce, #ffffff);
+border-radius: 40px;
+min-height: 450px;
+max-height: 450px;
+width: 80%;
+padding-bottom: 5px;
+}
+
+.OfertaEther h3{
+    font-size: 35px;
+}
+
+.infoSubastaActual{
+    font-size: 20px;
+    padding: 30px;
+}
+.infoSubastaActual h3{
+    font-size: 35px;
+}
+.contentInfo{
+    display: flex;
+    margin-top: 50px;
+    
+}
+
+.wide{
+    width: 50%;
 }

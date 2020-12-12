@@ -74,14 +74,14 @@ class OfertaForm extends React.Component {
         return (
             <div className="OfertaEther">
                 <h3>Oferta con Ether</h3>
-                <form className="formLinea" onSubmit={this.addOferta.bind(this)}>
-                    <label> Seleccione la cuenta:
-                     <select name="account" value={this.state.account} onChange={this.handleInputChange}>
+                <form className="formLinea " onSubmit={this.addOferta.bind(this)}>
+                    <label > Seleccione la cuenta:
+                     <select className='formLineaWide'name="account" value={this.state.account} onChange={this.handleInputChange}>
                             {this.getAllAcounts()}
                         </select>
                     </label>
-                    <label> ingrese la cantidad de ether a ofertar:
-                        <input name="ether" type="text" value={this.state.ether} onChange={this.handleInputChange} placeholder="valor en ether"></input>
+                    <label > ingrese la cantidad de ether a ofertar:
+                        <input className='formLineaWide'name="ether" type="text" value={this.state.ether} onChange={this.handleInputChange} placeholder="valor en ether"></input>
                     </label>
                     <input className="ok-button" type="submit" value="Enviar"></input>
                 </form>
