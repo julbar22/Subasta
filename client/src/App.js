@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-import ListaContratos from "./ListaContratos";
 import ReadSubasta from "./components/ReadSubasta";
-import SubastaForm from "./components/SubastaForm"
+import Manager from "./components/Manager"
 
 class App extends React.Component {
-  state = { loading: true, drizzleState: null, subastas: [], conContrato: false };
+  state = { loading: true, drizzleState: null, contrato: false };
   contractoAsignado = null;
   visualizacionContrato = false;
+  nameContract = "";
+  description = "";
   componentDidMount() {
     const { drizzle } = this.props;
 
@@ -28,40 +29,57 @@ class App extends React.Component {
     this.unsubscribe();
   }
 
-
-
-
-
   getTxStatus = () => {
     const { drizzle } = this.props;
     return drizzle.contracts;
   };
 
   getContract = (contrato) => {
-    alert("aqui no llega")
-    console.log(contrato)
     this.setState({ conContrato: true })
+  }
+
+  changeViewSubasta(subasta, flag) {
+    console.log(subasta);
+    if (subasta) {
+      this.nameContract = subasta.name;
+      this.description = subasta.description;
+    }
+    else {
+      this.nameContract = "";
+      this.description = "";
+    }
+    this.setState({ contrato: flag });
   }
 
 
   render() {
     const { drizzle } = this.props
     if (this.state.loading) return "Loading Drizzle...";
-    return (
-      <div className="App">
-        <header>
-          <h1>Subastas en Linea</h1>
-        </header>
-        <div className="content">
-          <div className="left">
-            <SubastaForm drizzle={drizzle} drizzleState={this.state.drizzleState} />
-          </div>
-          <div className="right">
-            <ReadSubasta drizzle={drizzle} drizzleState={this.state.drizzleState} />
+    if (!this.state.contrato)
+      return (
+        <div className="App">
+          <header className="header">
+            <h1>Subastas en Linea</h1>
+          </header>
+          <div>
+            <Manager drizzle={drizzle} drizzleState={this.state.drizzleState} changeViewSubasta={this.changeViewSubasta.bind(this)} />
           </div>
         </div>
-      </div>
-    );
+      );
+    else
+      return (
+        <div className="App">
+          <header className="header">
+            <h1>Subastas en Linea</h1>
+          </header>
+          <div className='spaceHeader' >
+            <div>
+              <input type="button" value="volver" className="behind-button" onClick={() => this.changeViewSubasta(null, false)} />
+            </div>
+            <ReadSubasta drizzle={drizzle} drizzleState={this.state.drizzleState} nameContract={this.nameContract} description={this.description} />
+          </div>
+        </div>
+      );
   }
 }
 

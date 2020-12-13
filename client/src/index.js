@@ -4,11 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Drizzle } from "@drizzle/store";
+import ManagerSubastas from './contracts/ManagerSubastas.json'
 import Subasta from './contracts/Subasta.json'
 
 // let drizzle know what contracts we want and how to access our test blockchain
 const options = {
-  contracts: [Subasta],
+  contracts: [ManagerSubastas],
   web3: {
     fallback: {
       type: "ws",

@@ -21,7 +21,7 @@ class OfertaForm extends React.Component {
     async addOferta(e) {
         e.preventDefault();
         const { drizzle, drizzleState } = this.props;
-        const contract = drizzle.contracts["Subasta"];
+        const contract = drizzle.contracts[this.props.nameContract];
         let ofertaValida = true;
         try {
             await contract.methods.bid().call({
@@ -64,7 +64,7 @@ class OfertaForm extends React.Component {
         else
             return (
                 <div>
-                    <h3>La oferta no esta valida, revisa los valores suministrados y la fecha de finalizacion de la subasta</h3>
+                    <h3>La oferta no es valida, revisa los valores suministrados y la fecha de finalizacion de la subasta</h3>
                 </div>
             )
     }
@@ -74,14 +74,14 @@ class OfertaForm extends React.Component {
         return (
             <div className="OfertaEther">
                 <h3>Oferta con Ether</h3>
-                <form className="formLinea" onSubmit={this.addOferta.bind(this)}>
-                    <label> Seleccione la cuenta:
-                     <select name="account" value={this.state.account} onChange={this.handleInputChange}>
+                <form className="formLinea " onSubmit={this.addOferta.bind(this)}>
+                    <label > Seleccione la cuenta:
+                     <select className='formLineaWide'name="account" value={this.state.account} onChange={this.handleInputChange}>
                             {this.getAllAcounts()}
                         </select>
                     </label>
-                    <label> ingrese la cantidad de ether a ofertar:
-                        <input name="ether" type="text" value={this.state.ether} onChange={this.handleInputChange} placeholder="valor en ether"></input>
+                    <label > ingrese la cantidad de ether a ofertar:
+                        <input className='formLineaWide'name="ether" type="text" value={this.state.ether} onChange={this.handleInputChange} placeholder="valor en ether"></input>
                     </label>
                     <input className="ok-button" type="submit" value="Enviar"></input>
                 </form>
