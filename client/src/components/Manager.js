@@ -33,12 +33,12 @@ class Manager extends React.Component {
     });
   }
 
-  async addSubasta(time, account, name) {
+  async addSubasta(time, account, name, description) {
     const subastaTemp = this.state.subastas;
     if (!subastaTemp.some((element) => element.name == name)) {
       const { drizzle } = this.props;
       const contractManager = drizzle.contracts["ManagerSubastas"];
-      const stackId = await contractManager.methods.createContract(time, account, name).send({
+      const stackId = await contractManager.methods.createContract(time, account, name, description).send({
         from: this.state.account
       });
 
@@ -64,11 +64,11 @@ class Manager extends React.Component {
       }
       try {
         drizzle.addContract(contractConfig)
-        subastaTemp.push({ name: valor[0], address: _address, fechaCreacion: new Date() });
+        subastaTemp.push({ name: valor[0], address: _address, fechaCreacion: new Date(), description: valor[3] });
         this.setState({ subastas: subastaTemp });
       } catch (e) {
         console.log("ya existe");
-        subastaTemp.push({ name: valor[0], address: _address, fechaCreacion: new Date() });
+        subastaTemp.push({ name: valor[0], address: _address, fechaCreacion: new Date(), description: valor[3] });
         this.setState({ subastas: subastaTemp });
       }
     }
@@ -81,6 +81,7 @@ class Manager extends React.Component {
         <div key={"div" + subasta.address} className="subastaItem">
           <label className="list" key={"key" + subasta.address}>Direccion: {subasta.address} </label>
           <label className="list" key={"name" + subasta.address}>Nombre: {subasta.name} </label>
+          <label className="list" key={"description" + subasta.address}>Descripcion: {subasta.description} </label>
           <div className="button">
             <input className="ok-button" type="button" value="Ver Subasta" onClick={() => this.sendSubasta(subasta)} />
           </div>

@@ -8,6 +8,7 @@ class App extends React.Component {
   contractoAsignado = null;
   visualizacionContrato = false;
   nameContract = "";
+  description = "";
   componentDidMount() {
     const { drizzle } = this.props;
 
@@ -38,8 +39,15 @@ class App extends React.Component {
   }
 
   changeViewSubasta(subasta, flag) {
-    if (subasta)
+    console.log(subasta);
+    if (subasta) {
       this.nameContract = subasta.name;
+      this.description = subasta.description;
+    }
+    else {
+      this.nameContract = "";
+      this.description = "";
+    }
     this.setState({ contrato: flag });
   }
 
@@ -68,7 +76,7 @@ class App extends React.Component {
             <div>
               <input type="button" value="volver" className="behind-button" onClick={() => this.changeViewSubasta(null, false)} />
             </div>
-            <ReadSubasta drizzle={drizzle} drizzleState={this.state.drizzleState} nameContract={this.nameContract} />
+            <ReadSubasta drizzle={drizzle} drizzleState={this.state.drizzleState} nameContract={this.nameContract} description={this.description} />
           </div>
         </div>
       );

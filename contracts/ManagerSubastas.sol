@@ -15,7 +15,8 @@ contract ManagerSubastas {
     function createContract(
         uint256 _biddingTime,
         address payable _beneficiary,
-        string memory nameContract
+        string memory nameContract,
+        string memory description
     ) public returns (address) {
         address newContract = address(new Subasta(_biddingTime, _beneficiary));
         uint256 fechaActual = now;
@@ -23,7 +24,7 @@ contract ManagerSubastas {
             nameContract,
             fechaActual,
             fechaActual + _biddingTime,
-            ""
+            description
         );
         newContractsAccts.push(newContract);
         return newContract;
@@ -38,13 +39,15 @@ contract ManagerSubastas {
         returns (
             string memory,
             uint256,
-            uint256
+            uint256,
+            string memory
         )
     {
         return (
             newContracts[_address].name,
             newContracts[_address].auctionStart,
-            newContracts[_address].auctionEnd
+            newContracts[_address].auctionEnd,
+            newContracts[_address].description
         );
     }
 }

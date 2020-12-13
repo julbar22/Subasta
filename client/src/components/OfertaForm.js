@@ -64,7 +64,7 @@ class OfertaForm extends React.Component {
         else
             return (
                 <div>
-                    <h3>La oferta no esta valida, revisa los valores suministrados y la fecha de finalizacion de la subasta</h3>
+                    <h3>La oferta no es valida, revisa los valores suministrados y la fecha de finalizacion de la subasta</h3>
                 </div>
             )
     }

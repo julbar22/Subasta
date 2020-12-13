@@ -9,14 +9,11 @@ contract Subasta {
     uint256 public biddingTime;
 
     // Estado actual de la subasta.
-    address public highestBidder;
+    address payable public highestBidder;
     uint256 public highestBid;
 
-    // Retiradas de dinero permitidas de las anteriores pujas
-    mapping(address => uint256) pendingReturns;
-
     // Fijado como true al final, no permite ningún cambio.
-    bool ended;
+    bool public ended;
 
     // Eventos que serán emitidos al realizar algún cambio
     event HighestBidIncreased(address bidder, uint256 amount);
@@ -56,36 +53,12 @@ contract Subasta {
         require(msg.value > highestBid, "La subasta debe ser mayor");
 
         if (highestBid != 0) {
-            // Devolver el dinero usando
-            // highestBidder.send(highestBid) es un riesgo
-            // de seguridad, porque la llamada puede ser evitada
-            // por el usuario elevando la pila de llamadas a 1023.
-            // Siempre es más seguro dejar que los receptores
-            // saquen su propio dinero.
-            pendingReturns[highestBidder] += highestBid;
+            // Devolver el dinero usado
+            highestBidder.send(highestBid);
         }
         highestBidder = msg.sender;
         highestBid = msg.value;
         emit HighestBidIncreased(msg.sender, msg.value);
-    }
-
-    /// Retira una puja que fue superada.
-    function withdraw() public returns (bool) {
-        uint256 amount = pendingReturns[msg.sender];
-        if (amount > 0) {
-            // Es importante poner esto a cero porque el receptor
-            // puede llamar de nuevo a esta función como parte
-            // de la recepción antes de que `send` devuelva su valor.
-            pendingReturns[msg.sender] = 0;
-
-            if (!msg.sender.send(amount)) {
-                // Aquí no es necesario lanzar una excepción.
-                // Basta con reiniciar la cantidad que se debe devolver.
-                pendingReturns[msg.sender] = amount;
-                return false;
-            }
-        }
-        return true;
     }
 
     /// Finaliza la subasta y envía la puja más alta al beneficiario.
@@ -108,9 +81,8 @@ contract Subasta {
 
         // 2. Ejecución
         ended = true;
+        beneficiary.send(highestBid);
         emit AuctionEnded(highestBidder, highestBid);
 
-        // 3. Interacción
-        beneficiary.transfer(highestBid);
     }
 }

@@ -5,7 +5,8 @@ class SubastaForm extends React.Component {
   state = {
     account: "",
     date: "",
-    name: ""
+    name: "",
+    description: ""
   }
 
   constructor(props) {
@@ -28,7 +29,7 @@ class SubastaForm extends React.Component {
     const dateActual = new Date();
     const differencia = (dateFinal.getTime() - dateActual.getTime()) / 1000;
     const valueFinal = Math.ceil(differencia)
-    this.props.agregarSubasta(valueFinal, this.state.account, this.state.name);
+    this.props.agregarSubasta(valueFinal, this.state.account, this.state.name,this.state.description);
     // const stackId = contract.methods.SimpleAuction.cacheSend(valueFinal, this.state.account, {
     //   from: this.state.account
     // });
@@ -59,7 +60,10 @@ class SubastaForm extends React.Component {
         <h3>Crea tu propia subasta</h3>
         <form className="formLinea" onSubmit={this.addSubasta.bind(this)}>
           <label> Nombre de la subasta:
-          <input className="formLineaWide" name="name" type="text" value={this.state.name} onChange={this.handleInputChange} placeholder="subasta ..."></input>
+          <input className="formLineaWide" name="name" type="text" value={this.state.name} onChange={this.handleInputChange} placeholder="subasta ..."  required></input>
+          </label>
+          <label> Descripción:
+          <input className="formLineaWide" name="description" type="text" value={this.state.description} onChange={this.handleInputChange} placeholder="se oferta un auto.."  required></input>
           </label>
           <label> Seleccione la cuenta:
           <select className="formLineaWide" name="account" value={this.state.account} onChange={this.handleInputChange}>
@@ -67,7 +71,7 @@ class SubastaForm extends React.Component {
             </select>
           </label>
           <label> Fecha de cierre de la subasta:
-          <input className="formLineaWide" name="date" type="datetime-local" value={this.state.date} onChange={this.handleInputChange} placeholder="tiempo en segundos"></input>
+          <input className="formLineaWide" name="date" type="datetime-local" value={this.state.date} onChange={this.handleInputChange} placeholder="tiempo en segundos" required></input>
           </label>
           <input className="ok-button" type="submit" value="Enviar"></input>
         </form>
